@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sa-frontend
+  labels:
+    app: sa-frontend
+spec:
+  containers:
+  - name: sa-frontend
+    image: udit7294/sentiment-analysis-frontend
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always

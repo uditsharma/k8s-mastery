@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sa-frontend-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80 # Port to which request will be coming.
+      targetPort: 80 # Target Port to which request will be forwarded
+      protocol: TCP
+  selector: # Rules for Selector to selector the pods based on info provided.
+      app: sa-frontend # will contact the pods for which app: sa-frontend is defined.
+
+# To use this servcie config to launch a service.
+# kubectl create -f service-sa-frontend-lb.yaml
+
+# Status of service
+# kubectl get svc
+

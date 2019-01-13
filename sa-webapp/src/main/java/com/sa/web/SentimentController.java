@@ -2,29 +2,31 @@ package com.sa.web;
 
 import com.sa.web.dto.SentenceDto;
 import com.sa.web.dto.SentimentDto;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class SentimentController {
 
-    @Value("${sa.logic.api.url}")
-    private String saLogicApiUrl;
+  @Value("${sa.logic.api.url}")
+  private String saLogicApiUrl;
 
-    @PostMapping("/sentiment")
-    public SentimentDto sentimentAnalysis(@RequestBody SentenceDto sentenceDto) {
-        RestTemplate restTemplate = new RestTemplate();
+  @PostMapping("/sentiment")
+  public SentimentDto sentimentAnalysis(@RequestBody SentenceDto sentenceDto) {
+    RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.postForEntity(saLogicApiUrl + "/analyse/sentiment",
-                sentenceDto, SentimentDto.class)
-                .getBody();
-    }
+    return restTemplate.postForEntity(saLogicApiUrl + "/analyse/sentiment", sentenceDto, SentimentDto.class).getBody();
+  }
 
-    @GetMapping("/testHealth")
-    public void testHealth() {
-    }
+  @GetMapping("/testHealth")
+  public void testHealth() {}
 }
 
 

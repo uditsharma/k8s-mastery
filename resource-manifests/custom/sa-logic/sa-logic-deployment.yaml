@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sa-logic
+  labels:
+    app: sa-logic
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      name: sa-logic
+      labels:
+        app: sa-logic
+    spec:
+      containers:
+      - name: sa-logic
+        image: udit7294/sentiment-analysis-logic
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5000
+  selector:
+    matchLabels:
+      app: sa-logic
+
+
+# TODO try if adding a new pod or removing a pod works when redeploy ?
